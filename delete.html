@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Delete your FamiCare account and data</title>
+<meta name="description" content="How to request deletion of your FamiCare account and the data associated with it, and what is deleted or kept." />
+<meta name="robots" content="index, follow" />
+<!--
+  FamiCare — account and data deletion page.
+  Required by Google Play (Data safety form: "Delete account URL").
+  Self-contained: no external CSS, no fonts, no scripts, no trackers.
+  Brand palette matches lib/core/theme/app_theme.dart.
+-->
+<style>
+  :root {
+    --blue: #007AFF;
+    --blue-pressed: #0066D6;
+    --blue-tint: #EAF3FF;
+    --charcoal: #1D1D1F;
+    --canvas: #F5F5F7;
+    --secondary: #6E6E73;
+    --separator: #E5E5EA;
+    --danger: #B3261E;
+    --danger-tint: #FFE5E1;
+    --ok: #16683B;
+    --radius: 16px;
+    --radius-lg: 22px;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--canvas);
+    color: var(--charcoal);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text",
+      "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 17px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  a { color: var(--blue); text-decoration: none; }
+  a:hover, a:focus { text-decoration: underline; }
+
+  .wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 32px 20px 80px;
+  }
+
+  /* ── Brand header ─────────────────────────────────────────── */
+  header.brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 8px 0 28px;
+  }
+  .mark {
+    width: 52px;
+    height: 52px;
+    border-radius: 15px;
+    background: var(--blue-tint);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .mark svg { display: block; }
+  .wordmark {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.4px;
+    line-height: 1.05;
+  }
+  .wordmark .orange { color: #EF851E; }
+  .tagline {
+    font-size: 13px;
+    color: var(--secondary);
+    margin-top: 2px;
+    letter-spacing: 0.2px;
+  }
+
+  /* ── Hero ─────────────────────────────────────────────────── */
+  .hero {
+    background: linear-gradient(135deg, var(--blue), #003D99);
+    color: #fff;
+    border-radius: var(--radius-lg);
+    padding: 26px 24px 24px;
+    box-shadow: 0 10px 24px rgba(0, 122, 255, 0.28);
+    margin-bottom: 22px;
+  }
+  .hero .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 11px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    font-size: 10.5px;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+  }
+  .hero h1 {
+    font-size: 28px;
+    line-height: 1.15;
+    letter-spacing: -0.6px;
+    margin: 14px 0 10px;
+    font-weight: 800;
+  }
+  .hero p {
+    margin: 0;
+    font-size: 15.5px;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.5;
+  }
+
+  /* ── Cards ────────────────────────────────────────────────── */
+  section.card {
+    background: #fff;
+    border: 1px solid var(--separator);
+    border-radius: var(--radius);
+    padding: 20px 22px;
+    margin-bottom: 16px;
+  }
+  section.card h2 {
+    font-size: 13px;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--secondary);
+    margin: 0 0 14px;
+  }
+  section.card h3 {
+    font-size: 17px;
+    font-weight: 700;
+    margin: 0 0 6px;
+    letter-spacing: -0.1px;
+  }
+  section.card p, section.card li {
+    font-size: 15.5px;
+    line-height: 1.55;
+  }
+  section.card p { margin: 0 0 12px; }
+  section.card p:last-child { margin-bottom: 0; }
+  section.card ul, section.card ol {
+    margin: 8px 0 12px;
+    padding-left: 22px;
+  }
+  section.card li { margin: 4px 0; }
+
+  /* ── Steps ────────────────────────────────────────────────── */
+  ol.steps {
+    list-style: none;
+    counter-reset: step;
+    padding: 0;
+    margin: 6px 0 0;
+  }
+  ol.steps li {
+    counter-increment: step;
+    display: flex;
+    gap: 14px;
+    padding: 12px 0;
+    border-top: 1px solid var(--separator);
+  }
+  ol.steps li:first-child { border-top: 0; }
+  ol.steps li::before {
+    content: counter(step);
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 999px;
+    background: var(--blue-tint);
+    color: var(--blue);
+    font-weight: 700;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1px;
+  }
+  ol.steps .body { flex: 1; }
+  ol.steps .body strong { font-weight: 700; }
+
+  /* ── Email fallback chip ──────────────────────────────────── */
+  .email {
+    display: inline-block;
+    padding: 8px 14px;
+    border-radius: 12px;
+    background: var(--canvas);
+    border: 1px solid var(--separator);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 14px;
+    color: var(--charcoal);
+    word-break: break-all;
+  }
+
+  /* ── Deleted / kept table ─────────────────────────────────── */
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  @media (min-width: 560px) {
+    .grid.two { grid-template-columns: 1fr 1fr; }
+  }
+  .panel {
+    border: 1px solid var(--separator);
+    border-radius: 14px;
+    padding: 16px 16px 14px;
+  }
+  .panel.deleted { background: rgba(22, 104, 59, 0.05); border-color: rgba(22, 104, 59, 0.25); }
+  .panel.kept    { background: rgba(0, 122, 255, 0.05); border-color: rgba(0, 122, 255, 0.25); }
+  .panel h3 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 15px;
+    font-weight: 800;
+    margin: 0 0 10px;
+  }
+  .panel.deleted h3 { color: var(--ok); }
+  .panel.kept h3    { color: var(--blue); }
+  .panel ul { margin: 0; padding-left: 20px; }
+  .panel li { font-size: 14.5px; margin: 3px 0; }
+
+  /* ── Notice ───────────────────────────────────────────────── */
+  .notice {
+    background: var(--danger-tint);
+    border: 1px solid rgba(179, 38, 30, 0.25);
+    border-radius: 14px;
+    padding: 14px 16px;
+    font-size: 14.5px;
+    color: var(--charcoal);
+    margin: 4px 0 0;
+  }
+  .notice strong { color: var(--danger); }
+
+  /* ── Footer ───────────────────────────────────────────────── */
+  footer {
+    margin-top: 26px;
+    text-align: center;
+    color: var(--secondary);
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  footer a { color: var(--secondary); }
+  footer a:hover { color: var(--blue); }
+  footer .sep { padding: 0 8px; opacity: 0.55; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ── Brand header ──────────────────────────────────────── -->
+  <header class="brand">
+    <div class="mark" aria-hidden="true">
+      <svg width="34" height="34" viewBox="0 0 100 100" role="img">
+        <defs>
+          <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#4C9BEE"/>
+            <stop offset="100%" stop-color="#0A57BC"/>
+          </linearGradient>
+          <linearGradient id="og" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#FFC76B"/>
+            <stop offset="100%" stop-color="#EF851E"/>
+          </linearGradient>
+        </defs>
+        <circle cx="33" cy="16" r="13" fill="url(#bg)"/>
+        <path d="M33 30 C15 32, 4 48, 4 65 C4 82, 22 96, 47 98 C52 98, 55 96, 58 92 C65 78, 66 58, 58 42 C52 33, 42 30, 33 30 Z" fill="url(#bg)"/>
+        <circle cx="72" cy="30" r="10" fill="url(#og)"/>
+        <path d="M72 41 C60 45, 55 58, 58 74 C62 88, 72 96, 82 96 C92 96, 97 86, 96 74 C95 58, 86 44, 72 41 Z" fill="url(#og)"/>
+      </svg>
+    </div>
+    <div>
+      <div class="wordmark">Fami<span class="orange">Care</span></div>
+      <div class="tagline">Better Care. Brighter Days.</div>
+    </div>
+  </header>
+
+  <!-- ── Hero ──────────────────────────────────────────────── -->
+  <div class="hero">
+    <span class="eyebrow">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M4 7h16M10 11v6M14 11v6M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2l1-12M9 7V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Delete account &amp; data
+    </span>
+    <h1>Delete your FamiCare account</h1>
+    <p>
+      This page explains exactly how to delete your FamiCare account and the
+      data associated with it, what will be deleted, what (if anything) is
+      kept, and for how long.
+    </p>
+  </div>
+
+  <!-- ── Steps ─────────────────────────────────────────────── -->
+  <section class="card" aria-labelledby="steps-title">
+    <h2 id="steps-title">How to request deletion</h2>
+
+    <h3>Option 1 — In the app (fastest)</h3>
+    <ol class="steps">
+      <li>
+        <div class="body">
+          Open the <strong>FamiCare</strong> app and sign in to the account
+          you want deleted.
+        </div>
+      </li>
+      <li>
+        <div class="body">
+          Go to <strong>Settings</strong> (the tab at the bottom right).
+        </div>
+      </li>
+      <li>
+        <div class="body">
+          Tap <strong>Data &amp; Privacy</strong>.
+        </div>
+      </li>
+      <li>
+        <div class="body">
+          Under <strong>Danger zone</strong>, tap
+          <strong>Delete all records from this phone</strong>. This clears the
+          local copy of the care record immediately.
+        </div>
+      </li>
+      <li>
+        <div class="body">
+          To delete the <em>account itself</em> as well (email, password, and
+          the server copy of the household record), email us at the address
+          below using the subject line <strong>“Delete my account”</strong>,
+          from the email address registered to your FamiCare account. We will
+          action the request within <strong>7 days</strong>.
+        </div>
+      </li>
+    </ol>
+
+    <p style="margin-top:16px;">
+      <strong>Email (account deletion):</strong><br />
+      <a class="email" href="mailto:famicare.health.app@gmail.com?subject=Delete%20my%20account">
+        famicare.health.app@gmail.com
+      </a>
+    </p>
+    <p style="font-size:14px;color:#6E6E73;margin-top:10px;">
+      Include the email address associated with your account. We may ask you
+      to confirm your identity from that same address before proceeding.
+    </p>
+  </section>
+
+  <!-- ── What gets deleted / kept ──────────────────────────── -->
+  <section class="card" aria-labelledby="what-title">
+    <h2 id="what-title">What is deleted and what is kept</h2>
+
+    <div class="grid two">
+      <div class="panel deleted">
+        <h3>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M20 6 9 17l-5-5" stroke="#16683B" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Deleted
+        </h3>
+        <ul>
+          <li>Your FamiCare account (email address, password, sign-in identity)</li>
+          <li>Household record and membership</li>
+          <li>People you care for (names, dates of birth, NHS numbers, allergies, GP details)</li>
+          <li>Medicines, dose schedules and dose history</li>
+          <li>Care-log entries and attached photos</li>
+          <li>Vitals and readings</li>
+          <li>Tasks, rota and shift swaps</li>
+          <li>Contacts and the emergency card</li>
+          <li>Documents stored in the vault</li>
+          <li>Expenses and the shared ledger</li>
+          <li>Legal and financial records</li>
+          <li>Care hours</li>
+          <li>Any pending sync data queued on our servers</li>
+          <li>Files in the FamiCare storage bucket that belong to your household</li>
+        </ul>
+      </div>
+
+      <div class="panel kept">
+        <h3>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="12" cy="12" r="9" stroke="#007AFF" stroke-width="2"/>
+            <path d="M12 7v6l4 2" stroke="#007AFF" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          Kept (temporarily)
+        </h3>
+        <ul>
+          <li>
+            <strong>Encrypted backups:</strong> a copy of your data may remain
+            in our encrypted backups for up to <strong>30 days</strong> after
+            deletion. It is not accessible through the app or our support
+            tools and is removed automatically at the end of that window.
+          </li>
+          <li>
+            <strong>Billing records:</strong> if you paid for a subscription,
+            Google Play and RevenueCat retain the purchase record for as long
+            as tax law requires. This contains no health or care data.
+          </li>
+          <li>
+            <strong>Anonymised, non-identifying error logs:</strong> we do not
+            run a crash-reporting or analytics SDK, so in practice there is
+            nothing in this category.
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="notice" style="margin-top:16px;">
+      <strong>Please note:</strong> once the account is deleted, the action
+      cannot be undone. FamiCare does not keep a trash can or a recovery
+      window beyond the encrypted-backup period described above.
+    </div>
+  </section>
+
+  <!-- ── Delete some data (no account deletion) ────────────── -->
+  <section class="card" aria-labelledby="some-title">
+    <h2 id="some-title">Delete some data without deleting your account</h2>
+    <p>
+      If you only want to remove part of your record and keep using FamiCare,
+      you can do all of the following inside the app — no email required, no
+      waiting period:
+    </p>
+    <ul>
+      <li>Delete an individual care-log entry, photo, vital, task, contact, document or expense.</li>
+      <li>Delete an entire person and everything attached to them.</li>
+      <li>Export a full copy of your data as JSON before deleting anything (Settings ▸ Data &amp; Privacy ▸ Export everything).</li>
+      <li>Leave a shared household without deleting your account.</li>
+    </ul>
+    <p style="font-size:14px;color:#6E6E73;">
+      The same choices are described in the Google Play Data safety section
+      for FamiCare.
+    </p>
+  </section>
+
+  <!-- ── Contact ───────────────────────────────────────────── -->
+  <section class="card" aria-labelledby="contact-title">
+    <h2 id="contact-title">Questions</h2>
+    <p>
+      If anything on this page is unclear, or you would like confirmation that
+      your data has been deleted, email
+      <a href="mailto:famicare.health.app@gmail.com?subject=FamiCare%20data%20deletion">
+        famicare.health.app@gmail.com</a>.
+      A real person reads this inbox.
+    </p>
+  </section>
+
+  <!-- ── Footer ────────────────────────────────────────────── -->
+  <footer>
+    <div>
+      FamiCare &middot; <a href="https://FamiCare.app/privacy">Privacy notice</a>
+      <span class="sep">·</span>
+      <a href="https://FamiCare.app/terms">Terms of use</a>
+      <span class="sep">·</span>
+      <a href="https://FamiCare.app/delete">Delete account</a>
+    </div>
+    <div style="margin-top:8px;">
+      Last updated: September 2026
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>
